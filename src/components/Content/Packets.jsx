@@ -1,5 +1,6 @@
-import { Button, Card, Divider, Image, List, Space } from "antd";
+import { Button, Card, Col, Divider, Image, List, Row, Space } from "antd";
 import Title from "antd/lib/typography/Title";
+
 
 import React from "react";
 
@@ -40,39 +41,24 @@ const Packets = () => {
         dataSource={data}
         renderItem={(item) => (
           <List.Item onClick={() => console.log(item.title)}>
-            <Card>
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Image
-                  width={100}
-                  src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                />
-
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    marginLeft: 20,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: 100,
-                      direction: "row",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <p>paket adı</p>
-
-                    <p>paket parası</p>
-                  </div>
-
-                  <div style={{ display: "flex" }}>Detaylar</div>
-
-                  <div style={{ display: "flex" }}>Tagler</div>
-                </div>
-              </div>
+            <Card style={{maxWidth: 600}} >
+              <Row>
+                <Col span={4}>
+                  <Image
+                    width={100}
+                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+                  />
+                </Col>
+                <Col span={12} style= {{marginLeft:50}}>
+                  <Row gutter={[100, 40]} >
+                    <Col>paket adı</Col>
+                    <Col>paket parası</Col>
+                  </Row>
+                  
+                  <Row>Detaylar</Row>
+                  <Row>Tagler</Row>
+                </Col>
+              </Row>
             </Card>
           </List.Item>
         )}
