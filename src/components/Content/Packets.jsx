@@ -1,7 +1,6 @@
 import { Button, Card, Col, Divider, Image, List, Row, Space } from "antd";
 import Title from "antd/lib/typography/Title";
-
-
+import { gray } from '@ant-design/colors';
 import React from "react";
 
 const Packets = () => {
@@ -41,20 +40,20 @@ const Packets = () => {
         dataSource={data}
         renderItem={(item) => (
           <List.Item onClick={() => console.log(item.title)}>
-            <Card style={{maxWidth: 600}} >
-              <Row>
+            <Card style={{ maxWidth: 600 }}>
+              <Row style={{backgroundColor: "#595959",borderRadius:10}}>
                 <Col span={4}>
                   <Image
                     width={100}
                     src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
                   />
                 </Col>
-                <Col span={12} style= {{marginLeft:50}}>
-                  <Row gutter={[100, 40]} >
+                <Col span={12} style={{ marginLeft: 50 }}>
+                  <Row gutter={[100, 40]}>
                     <Col>paket adı</Col>
                     <Col>paket parası</Col>
                   </Row>
-                  
+
                   <Row>Detaylar</Row>
                   <Row>Tagler</Row>
                 </Col>
@@ -79,8 +78,9 @@ const Packets = () => {
         </div>
 
         <Button type="primary" style={{ marginBottom: 10 }} size={"medium"}>
-          Primary
+         Devam Et
         </Button>
+        
       </div>
     </>
   );
