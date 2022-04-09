@@ -1,16 +1,25 @@
 import React from "react";
 import { Button, Card, Form, Input } from "antd";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+    navigate("/packetsContent")
     form.resetFields();
   };
   return (
     <>
-      <Card style={{ width: 300, borderRadius: 10 ,boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)" }}>
+      <Card
+        style={{
+          width: 300,
+          borderRadius: 10,
+          boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)",
+        }}
+      >
         <Form
           name="normal_login"
           className="login-form"

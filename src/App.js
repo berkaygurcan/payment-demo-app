@@ -1,14 +1,18 @@
-import React from 'react';
-
-import { Counter } from './features/counter/Counter';
-import './App.css';
-import Login from './components/Auth/Login';
-
+import React from "react";
+import "antd/dist/antd.css";
+import "./App.css";
+import { Routes, Route, Link } from "react-router-dom";
+import PacketsContent from "./components/Content/PacketsContent";
+import Login from "./components/Auth/Login";
+import PaymentContent from "./components/Content/PaymentContent";
 function App() {
   return (
-    <div className="App">
-     <Login />
-    </div>
+    //@todo - routing yapılacak
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/packetsContent" element={<PacketsContent />} />
+      <Route path="/paymentContent" element={<PaymentContent />} />
+    </Routes>
   );
 }
 
