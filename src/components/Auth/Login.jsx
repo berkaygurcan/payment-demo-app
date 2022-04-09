@@ -1,15 +1,22 @@
 import React from "react";
 import { Button, Card, Form, Input } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "../../features/counter/userSlice";
+
 
 const Login = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
-    navigate("/packetsContent")
-    form.resetFields();
+    //istek atılacak
+    dispatch(signUp(values)).then(() => {
+      navigate("/packetsContent");
+      form.resetFields();
+    });
   };
   return (
     <>
@@ -32,7 +39,7 @@ const Login = () => {
         >
           <Form.Item
             label="Adınız ve Soyadınız"
-            name="username"
+            name="fullName"
             rules={[
               {
                 required: true,

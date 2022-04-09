@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import auth from "../services/odevserver/controllers/auth";
+import auth from "../../services/odevserver/controllers/auth";
 const initialState = {
   value: {},
   status: "idle",

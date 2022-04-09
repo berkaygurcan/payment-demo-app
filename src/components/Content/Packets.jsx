@@ -1,30 +1,16 @@
-import { Button, Card, Col, Divider, Image, List, Row, Space } from "antd";
+import { Button, Card, Col, Divider, Image, List, Row, Space, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
-import { gray } from '@ant-design/colors';
-import React from "react";
+import { gray } from "@ant-design/colors";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import Text from "antd/lib/typography/Text";
+import { InfoCircleTwoTone } from "@ant-design/icons";
 
 const Packets = () => {
   //bu data normalde state ile gelicek
-  const data = [
-    {
-      title: "Title 1",
-    },
-    {
-      title: "Title 2",
-    },
-    {
-      title: "Title 3",
-    },
-    {
-      title: "Title 4",
-    },
-    {
-      title: "Title 5",
-    },
-    {
-      title: "Title 6",
-    },
-  ];
+  const packets = useSelector((state) => state.packets.value);
+  const [selectedItems,setSelectedItems] = useState()
+  
   return (
     <>
       <List
@@ -37,32 +23,53 @@ const Packets = () => {
           xl: 2,
           xxl: 2,
         }}
-        dataSource={data}
+        dataSource={packets}
         renderItem={(item) => (
-          <List.Item onClick={() => console.log(item.title)}>
-            <Card style={{ maxWidth: 600 }}>
-              <Row style={{backgroundColor: "#595959",borderRadius:10}}>
-                <Col span={4}>
-                  <Image
-                    width={100}
-                    src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-                  />
-                </Col>
-                <Col span={12} style={{ marginLeft: 50 }}>
-                  <Row gutter={[100, 40]}>
-                    <Col>paket adı</Col>
-                    <Col>paket parası</Col>
-                  </Row>
+          <List.Item
+            onClick={() => {
+              console.log(item);
+              
+            }}
+          >
+            <Row
+              style={{
+                backgroundColor: "#595959",
+                borderRadius: 10,
+                maxWidth: 550,
+                margin: "auto",
+              }}
+            >
+              <Col span={4}>
+                <Image width={100} src={item.imagePath} />
+              </Col>
+              <Col span={12} style={{ marginLeft: 50 }}>
+                <Row gutter={[100, 40]}>
+                  <Col>
+                    <Title level={5}>{item.name}</Title>
+                  </Col>
+                  <Col>
+                    <Title level={5}>{item.amount + " " + item.currency}</Title>
+                  </Col>
+                </Row>
 
-                  <Row>Detaylar</Row>
-                  <Row>Tagler</Row>
-                </Col>
-              </Row>
-            </Card>
+                <Row gutter={[16, 16]}>
+                  {item.details.map((detail) => (
+                    <Col>
+                      <InfoCircleTwoTone twoToneColor="#52c41a" />
+                      <Text type="success"> {" " + detail}</Text>
+                    </Col>
+                  ))}
+                </Row>
+                <Row gutter={[1, 16]}>
+                  {item.tags.map((tag) => (
+                    <Tag color="geekblue">{tag}</Tag>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
           </List.Item>
         )}
       />
-
       <Divider />
 
       <div
@@ -78,9 +85,8 @@ const Packets = () => {
         </div>
 
         <Button type="primary" style={{ marginBottom: 10 }} size={"medium"}>
-         Devam Et
+          Devam Et
         </Button>
-        
       </div>
     </>
   );

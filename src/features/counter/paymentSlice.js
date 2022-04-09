@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import payment from "../services/odevserver/controllers/payment";
+import payment from "../../services/odevserver/controllers/payment";
 const initialState = {
   value: {},
   status: "idle",
