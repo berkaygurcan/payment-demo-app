@@ -34,4 +34,4 @@ export const packagesSlice = createSlice({
   },
 });
 
-export default counterSlice.reducer;
+export default packagesSlice.reducer;

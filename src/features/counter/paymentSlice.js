@@ -21,7 +21,7 @@ export const makePayment = createAsyncThunk("user/signUp", async (payload) => {
   return response.data;
 });
 
-export const packagesSlice = createSlice({
+export const paymentSlice = createSlice({
   name: "payment",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
@@ -40,4 +40,4 @@ export const packagesSlice = createSlice({
   },
 });
 
-export default counterSlice.reducer;
+export default paymentSlice.reducer;

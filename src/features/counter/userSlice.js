@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCount } from "./counterAPI";
 import auth from "../services/odevserver/controllers/auth";
 const initialState = {
   value: {},
@@ -32,4 +31,4 @@ export const userSlice = createSlice({
 });
 
 
-export default counterSlice.reducer;
+export default userSlice.reducer;
