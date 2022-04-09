@@ -1,17 +1,13 @@
 import { Button, Card, Col, Layout, List, Row, Typography } from "antd";
 import { Content, Header } from "antd/lib/layout/layout";
 import React from "react";
-import HeaderComp from "./HeaderComp";
+import { useSelector } from "react-redux";
+
 import Payment from "./Payment";
 
 const PaymentContent = () => {
-  const data = [
-    "Racing car sprays burning fuel into crowd.",
-    "Japanese princess to wed commoner.",
-    "Australian walks 100km after outback crash.",
-    "Man charged over missing wedding girl.",
-    "Los Angeles battles huge wildfires.",
-  ];
+  const selectedPackets = useSelector((state) => state.packets.selectedItems);
+ 
   return (
     <Row justify="center" gutter={30}>
       <Col span={8}>
@@ -23,10 +19,10 @@ const PaymentContent = () => {
           <List
             header={<div>Sepetteki Paketler</div>}
             bordered
-            dataSource={data}
+            dataSource={selectedPackets}
             renderItem={(item) => (
               <List.Item>
-                <Typography.Text mark>[ITEM]</Typography.Text> {item}
+                <Typography.Text mark>{item.name}</Typography.Text> {item.amount}
               </List.Item>
             )}
           />
