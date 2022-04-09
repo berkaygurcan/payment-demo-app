@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Divider, Image, List, Row, Space, Tag } from "antd";
 import Title from "antd/lib/typography/Title";
 
@@ -8,29 +8,29 @@ import { InfoCircleTwoTone } from "@ant-design/icons";
 import { add, remove } from "../../features/counter/packetsSlice";
 
 const PacketsListItem = ({ item }) => {
-  
   const dispatch = useDispatch();
-  
+  const [isSelected, setIsSelected] = useState(false);
   const selectedPackets = useSelector((state) => state.packets.selectedItems);
   const selectedBorderStyle = "3px solid red";
 
-  const result = selectedPackets.some(
-    (selectedItem) => selectedItem.id === item.id
-  );
+  useEffect(() => {
+    //eğer sayfada önceden seçim yapıldıysa ödeme ekranından dönülürse diye seçilmişleri kontrol edeceğiz
+    const result = selectedPackets.some(
+      (selectedItem) => selectedItem.id === item.id
+    );
 
-  
- 
+    if (result) setIsSelected(result);
+  });
+
   const handleClick = () => {
     setIsSelected(!isSelected);
 
     if (!isSelected) {
       //eğer seçildiyse
       dispatch(add(item));
-      
     } else {
       //eğer seçildikten sonra deaktif duruma getirilirse
       dispatch(remove(item));
-      
     }
   };
 

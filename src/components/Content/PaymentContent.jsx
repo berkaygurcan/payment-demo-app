@@ -22,7 +22,7 @@ const PaymentContent = () => {
             dataSource={selectedPackets}
             renderItem={(item) => (
               <List.Item>
-                <Typography.Text mark>{item.name}</Typography.Text> {item.amount}
+                <Typography.Text mark>{item.name}</Typography.Text> {item.amount} tl
               </List.Item>
             )}
           />
