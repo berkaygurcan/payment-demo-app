@@ -11,7 +11,7 @@ const HeaderComp = () => {
         Logo gelicek buraya
       </div>
 
-      <div>
+      <div style={{ display: "flex", justifyContent: "space-around", alignItems:"center",gap:10}}>
         <Avatar size="small" icon={<UserOutlined />} />
         <Text>Ant Design (default)</Text>
       </div>
