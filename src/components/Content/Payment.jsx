@@ -15,9 +15,14 @@ const Payment = ({ form }) => {
     return selectedPackets.reduce((total, item) => total + item.amount, 0);
   };
 
+  const selectedPacketsIds = selectedPackets.map((packet) => {
+    return packet.id;
+  });
+
   const onFinish = (values) => {
     const perfectValues = {
       ...values,
+      packageIds: selectedPacketsIds,
       cvv: values.cvv.toString(),
       totalAmount: calculateTotalPrice(),
       cardNumber: values["cardNumber"].replace(/\s/g, ""), //boşluklardan kurtulmak için regex
@@ -25,9 +30,7 @@ const Payment = ({ form }) => {
     };
     console.log("Received values of form: ", perfectValues);
     dispatch(makePayment(perfectValues)).then((data) => {
-      if(data.type === 'payment/makePayment/fulfilled')
-      console.log(data)
-      navigate("/success");
+      if (data.type === "payment/makePayment/fulfilled") navigate("/success");
     });
   };
 
