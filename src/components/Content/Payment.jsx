@@ -20,6 +20,7 @@ const Payment = ({ form }) => {
   });
 
   const onFinish = (values) => {
+    //formdan gelen datayı apiye hazırlama
     const perfectValues = {
       ...values,
       packageIds: selectedPacketsIds,
@@ -28,7 +29,7 @@ const Payment = ({ form }) => {
       cardNumber: values["cardNumber"].replace(/\s/g, ""), //boşluklardan kurtulmak için regex
       expireDate: values["expireDate"].format("MM-YYYY"),
     };
-    console.log("Received values of form: ", perfectValues);
+   // console.log("Received values of form: ", perfectValues);
     dispatch(makePayment(perfectValues)).then((data) => {
       if (data.type === "payment/makePayment/fulfilled") navigate("/success");
     });
@@ -117,6 +118,7 @@ const Payment = ({ form }) => {
           borderRadius: 10,
         }}
       >
+        {/* Burada normalde istek atılıp gelen değer render edilecek fakat api çalışmadığı için lorem basıldı */}
         <Text strong>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
           tenetur, fugiat soluta doloribus, dolores ad cumque, deserunt quae

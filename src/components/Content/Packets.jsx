@@ -9,7 +9,7 @@ import { clear, clearSelectedItems } from "../../features/counter/packetsSlice";
 import PacketsListItem from "./PacketsListItem";
 
 const Packets = () => {
-  //bu data normalde state ile gelicek
+  
   const packets = useSelector((state) => state.packets.value);
   const dispatch = useDispatch();
   const selectedPackets = useSelector((state) => state.packets.selectedItems);
