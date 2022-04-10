@@ -4,8 +4,11 @@ import Text from "antd/lib/typography/Text";
 import Logo from "./logo.png"
 
 import React from "react";
+import { useSelector } from "react-redux";
 
 const HeaderComp = () => {
+  
+  const userData = useSelector((state) => state.user.value);
   return (
     <header
       id="main-header"
@@ -28,7 +31,7 @@ const HeaderComp = () => {
         }}
       >
         <Avatar size="small" icon={<UserOutlined />} />
-        <Text>Ant Design (default)</Text>
+        <Text>{userData.name ? userData.name : "default value"}</Text>
       </div>
     </header>
   );

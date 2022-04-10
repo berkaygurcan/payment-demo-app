@@ -10,19 +10,19 @@ import Packets from "./Packets";
 const PacketsContent = () => {
   //paketlerimizi çekeceğiz
   const dispatch = useDispatch();
- 
+  
   useEffect(() => {
    
     dispatch(fetchPackets());
   }, []);
  
   return (
-    <Layout style={{ padding: 40 }}>
+    <Layout >
       <Header style={{ backgroundColor: "#fff", marginBottom: 5 }}>
         <HeaderComp />
       </Header>
       <Content
-        style={{ backgroundColor: "#fff", borderRadius: 10, padding: 10 }}
+        style={{ backgroundColor: "#fff", borderRadius: 10, padding: 10,marginLeft:150,marginRight:150}}
       >
         <Packets />
       </Content>
