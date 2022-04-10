@@ -1,12 +1,29 @@
 import { Button, Card, DatePicker, Form, Input, InputNumber } from "antd";
 import Text from "antd/lib/typography/Text";
-import React from "react";
+import React, { useState } from "react";
 
-const Payment = () => {
-  const [form] = Form.useForm();
-
+const Payment = ({ form }) => {
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    const perfectValues = {
+      ...values,
+      expireDate: values["expireDate"].format("MM-YYYY"),
+    };
+    console.log("Received values of form: ", perfectValues);
+    console.log(numberFormat(perfectValues.cardNumber));
+  };
+
+  function numberFormat(x) {
+    if (x.length < 17 && x.length % 4 === 0) {
+      return x.replace(/(.{4})/g, "$1 ");
+    }
+  }
+
+  const handleChange = (e) => {
+    const x = numberFormat(e.target.value)
+    console.log(x)
+    form.setFieldsValue({
+      cardNumber: x
+    });
   };
 
   const config = {
@@ -19,16 +36,12 @@ const Payment = () => {
     ],
   };
 
-  const onPayment = () => {
-    form.submit();
-  };
   return (
-    <Card style={{maxWidth: 450, borderRadius: 10}}>
+    <Card style={{ maxWidth: 450, borderRadius: 10 }}>
       <Card
         title="Kart Bilgileri"
         style={{
           width: 400,
-          
         }}
       >
         <Form
@@ -43,7 +56,7 @@ const Payment = () => {
         >
           <Form.Item
             label="Kart Üzerindeki İsim ve Soyisim"
-            name="username"
+            name="cardHolderName"
             rules={[
               {
                 required: true,
@@ -54,7 +67,7 @@ const Payment = () => {
             <Input placeholder="Username" />
           </Form.Item>
           <Form.Item
-            name="email"
+            name="cardNumber"
             label="Kart Numarası"
             rules={[
               {
@@ -63,16 +76,15 @@ const Payment = () => {
               },
             ]}
           >
-            <Input placeholder="Credit Card Number" />
+            <Input onChange={handleChange} placeholder="Credit Card Number" />
           </Form.Item>
 
-          <Form.Item name="date-time-picker" label="Son Kul. Tar." {...config}>
+          <Form.Item name="expireDate" label="Son Kul. Tar." {...config}>
             <DatePicker format={"MM/YYYY"} picker="month" />
-            
           </Form.Item>
           <Form.Item
             label="CVV/CVC"
-            name="inputNumber"
+            name="cvv"
             rules={[
               {
                 required: true,
@@ -89,7 +101,7 @@ const Payment = () => {
         title="Sözleşme"
         style={{
           width: 400,
-          marginTop:10,
+          marginTop: 10,
           borderRadius: 10,
         }}
       >

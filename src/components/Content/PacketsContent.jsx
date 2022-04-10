@@ -12,7 +12,7 @@ const PacketsContent = () => {
   const dispatch = useDispatch();
  
   useEffect(() => {
-    console.log("useeffect çalıştı")
+   
     dispatch(fetchPackets());
   }, []);
  
