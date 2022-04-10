@@ -1,25 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Card, Form, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { MailOutlined, UserOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../../features/counter/userSlice";
 
-
 const Login = () => {
   const [form] = Form.useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+ 
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
     //istek atılacak
-    dispatch(signUp(values)).then(() => {
-      navigate("/packetsContent");
+    dispatch(signUp(values)).then((data) => {
+      if(data.type === 'user/signUp/fulfilled')
+      navigate('packetsContent')
       form.resetFields();
     });
   };
   return (
-    <>
+    <div style={{display:"flex", flexDirection:"column",justifyContent:"center",alignItems:"center",height:"80vh"}}>
       <Card
         style={{
           width: 300,
@@ -84,7 +85,7 @@ const Login = () => {
           </Form.Item>
         </Form>
       </Card>
-    </>
+    </div>
   );
 };
 

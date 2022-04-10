@@ -2,19 +2,35 @@ import { Button, Card, DatePicker, Form, Input, InputNumber } from "antd";
 import Text from "antd/lib/typography/Text";
 import React, { useState } from "react";
 import Cleave from "cleave.js/react";
+import { useDispatch, useSelector } from "react-redux";
+import { makePayment } from "../../features/counter/paymentSlice";
+import { useNavigate } from "react-router-dom";
 
 const Payment = ({ form }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const selectedPackets = useSelector((state) => state.packets.selectedItems);
+  const calculateTotalPrice = () => {
+    return selectedPackets.reduce((total, item) => total + item.amount, 0);
+  };
+
   const onFinish = (values) => {
     const perfectValues = {
       ...values,
       cvv: values.cvv.toString(),
+      totalAmount: calculateTotalPrice(),
       cardNumber: values["cardNumber"].replace(/\s/g, ""), //boşluklardan kurtulmak için regex
       expireDate: values["expireDate"].format("MM-YYYY"),
     };
     console.log("Received values of form: ", perfectValues);
+    dispatch(makePayment(perfectValues)).then((data) => {
+      if(data.type === 'payment/makePayment/fulfilled')
+      console.log(data)
+      navigate("/success");
+    });
   };
 
- 
   const config = {
     rules: [
       {

@@ -9,9 +9,9 @@ const PaymentContent = () => {
   const selectedPackets = useSelector((state) => state.packets.selectedItems);
   const [form] = Form.useForm();
   const onPayment = () => {
-    
     form.submit();
   };
+  
   
 
   return (

@@ -14,7 +14,7 @@ export const fetchPaymentResult = createAsyncThunk(
   }
 );
 
-export const makePayment = createAsyncThunk("user/signUp", async (payload) => {
+export const makePayment = createAsyncThunk("payment/makePayment", async (payload) => {
   const response = await payment.create(payload);
   // The value we return becomes the `fulfilled` action payload
   return response.data;

@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import auth from "../../services/odevserver/controllers/auth";
 const initialState = {
   value: {},
-  status: "idle",
+  status: "",
 };
 
 export const signUp = createAsyncThunk("user/signUp", async (payload) => {
