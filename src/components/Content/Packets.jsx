@@ -20,7 +20,9 @@ const Packets = () => {
   };
 
   const handleClick = () => {
-    navigate("/paymentContent");
+    navigate("/paymentContent", {
+      totalAmount: calculateTotalPrice()
+    });
   };
 
   return (

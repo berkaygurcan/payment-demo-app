@@ -1,31 +1,20 @@
 import { Button, Card, DatePicker, Form, Input, InputNumber } from "antd";
 import Text from "antd/lib/typography/Text";
 import React, { useState } from "react";
+import Cleave from "cleave.js/react";
 
 const Payment = ({ form }) => {
   const onFinish = (values) => {
     const perfectValues = {
       ...values,
+      cvv: values.cvv.toString(),
+      cardNumber: values["cardNumber"].replace(/\s/g, ""), //boşluklardan kurtulmak için regex
       expireDate: values["expireDate"].format("MM-YYYY"),
     };
     console.log("Received values of form: ", perfectValues);
-    console.log(numberFormat(perfectValues.cardNumber));
   };
 
-  function numberFormat(x) {
-    if (x.length < 17 && x.length % 4 === 0) {
-      return x.replace(/(.{4})/g, "$1 ");
-    }
-  }
-
-  const handleChange = (e) => {
-    const x = numberFormat(e.target.value)
-    console.log(x)
-    form.setFieldsValue({
-      cardNumber: x
-    });
-  };
-
+ 
   const config = {
     rules: [
       {
@@ -76,7 +65,11 @@ const Payment = ({ form }) => {
               },
             ]}
           >
-            <Input onChange={handleChange} placeholder="Credit Card Number" />
+            <Cleave
+              className="ant-input"
+              placeholder="XXXX XXXX XXXX XXXX"
+              options={{ creditCard: true }}
+            />
           </Form.Item>
 
           <Form.Item name="expireDate" label="Son Kul. Tar." {...config}>
@@ -92,7 +85,7 @@ const Payment = ({ form }) => {
               },
             ]}
           >
-            <InputNumber min={100} max={999} />
+            <InputNumber type="password" min={100} max={9999} />
           </Form.Item>
         </Form>
       </Card>

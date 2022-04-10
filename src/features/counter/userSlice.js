@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 import auth from "../../services/odevserver/controllers/auth";
 const initialState = {
   value: {},
@@ -22,10 +23,17 @@ export const userSlice = createSlice({
     builder
       .addCase(signUp.pending, (state) => {
         state.status = "loading";
+        
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.status = "idle";
         state.value = action.payload;
+      
+      })
+      .addCase(signUp.rejected, (state, action) => {
+        state.status = "rejeted";
+        state.value = action.payload;
+      
       });
   },
 });
